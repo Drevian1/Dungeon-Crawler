@@ -1,0 +1,20 @@
+public class Sword extends Weapon{ 
+public Sword(){
+        WeaponName = "TestSword";
+        DMG = 5;
+        AC = 20;
+        DUR = 10;
+    }
+
+    Dice dice = new Dice();
+
+    public void Attack() {
+        new Sword();
+
+        System.out.println("Target has taken " + DMG + " Damage");
+        System.out.println("Skeleton has " + Skeleton.baseHP + " health left");
+        Skeleton.baseHP = Skeleton.baseHP - DMG;
+
+
+    }
+    }
