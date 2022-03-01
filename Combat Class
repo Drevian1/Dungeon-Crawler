@@ -1,0 +1,14 @@
+public class Combat extends Weapon {
+
+    public void BattleCheck(){
+        int h = Skeleton.baseHP;
+        if(h == 30 ){
+            System.out.println("Skeleton is at full health!");
+
+        }if(h < 0){
+            System.out.println("Skeleton has been defeated!");
+
+        }
+
+    }
+}
