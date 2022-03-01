@@ -1,0 +1,7 @@
+abstract class Weapon {
+    public String WeaponName;
+    int DMG;
+    int AC;
+    int DUR;
+
+}
