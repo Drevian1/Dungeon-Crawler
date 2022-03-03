@@ -1,7 +1,7 @@
 public class Combat extends Weapon {
 
     public void BattleCheck(){
-        int h = Skeleton.baseHP;
+        int h = Enemies.baseHP;
         if(h == 30 ){
             System.out.println("Skeleton is at full health!");
 
@@ -10,5 +10,17 @@ public class Combat extends Weapon {
 
         }
 
+    }
+
+    public boolean WinCheck(){
+
+        if(Enemies.baseHP == 0){
+            System.out.println("You win");
+            return true;
+        }else {
+
+
+            return false;
+        }
     }
 }
