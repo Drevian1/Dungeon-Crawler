@@ -16,6 +16,9 @@ public class DoWork {
     Character stats = new Character();
     Race race;
     String define = "";
+    PClass pClass;
+    Encounter encounter = new Encounter();
+    Monster monster;
 
     public void menu(){
         CharacterMenu();
@@ -23,11 +26,17 @@ public class DoWork {
     }
 
     public void printCharacter(){
-        System.out.println("Race: " + define + '\n' + "Name: " + stats.getName());
+        System.out.println("Race: " + define + '\n' + "Name: " + stats.getName() + "Class: " + stats.getpClass());
 
-        System.out.println("AC: " + stats.getArmorClass());
+
 
         stats.printStats();
+    }
+    public void combat(){
+        boolean combatLoop = true;
+        while (combatLoop != false){
+            System.out.println("What would you like to do? " + '\n' + "A: Attack" + '\n' + "B: Cast Spell"+ '\n' + "Disengage");
+        }
     }
 
     public void CharacterMenu(){
@@ -43,8 +52,9 @@ public class DoWork {
                 if (makeNew.equals("y")) {
                     setRace();
                     StatMenu();
-                    stats.setArmorClass(stats.getArmorClass() + setACMod());
+
                     setName();
+                    setClass();
                     printCharacter();
                     createLoop = false;
                 } else if (makeNew.equals("n")) {
@@ -77,18 +87,34 @@ public class DoWork {
             }
         }
     }
+    public void setClass(){
+        boolean classLoop = true;
+        while (classLoop != false){
+            System.out.println("Select what class you would like your character to be:" + '\n' + "A: Fighter" + '\n' + "B: Barbarian" + '\n' + "C: Rogue" + '\n' + "D: Wizard" + '\n' + "E: Paladin");
+            String decison = GetString().toLowerCase(Locale.ROOT);
+            if (decison.equals("a")){
+                pClass = new Fighter();
+                classLoop = false;
+            }else if(decison.equals("b")){
+                pClass = new Barbarian();
+                classLoop = false;
+            }else if(decison.equals("c")){
+                pClass = new Rogue();
+                classLoop = false;
+            }else if(decison.equals("d")){
+                pClass = new Wizard();
+                classLoop = false;
+            }else if(decison.equals("e")) {
+                pClass = new Paladin();
+                classLoop = false;
+            }else{
+                System.out.println("Please enter valid option");
+            }
+        }
+    }
     public void StatMenu(){
 
         boolean statLoop = true;
-//        boolean reroll = true;
-//        boolean rollLoop = true;
-//        boolean strLoop = true;
-//        boolean dexLoop = true;
-//        boolean conLoop = true;
-//        boolean wisLoop = true;
-//        boolean intLoop = true;
-//        boolean chaLoop = true;
-//        boolean change = false;
 
 
         while (statLoop != false) {
@@ -96,106 +122,23 @@ public class DoWork {
             getStats();
             printStats();
             setSTR();
+            stats.setStrMod();
             setDEX();
+            stats.setDexMod();
             setCON();
+            stats.setConMod();
             setWIS();
+            stats.setWisMod();
             setINT();
+            stats.setIntMod();
             setCHA();
+            stats.setChaMod();
             stats.printStats();
             statLoop = false;
 
-//            stats.generateStats();
-//
-//            if (reroll == true) {
-//                while (rollLoop != false) {
-//                    System.out.println("Would you like to reroll stats? Y or no");
-//                    String loop = GetString().toLowerCase(Locale.ROOT);
-//                    if (loop.equals("y")) {
-//                        stats.generateStats();
-//                    } else if (loop.equals("n")) {
-//                        rollLoop = false;
-//                    }else{
-//                        System.out.println("Enter valid String");
-//                    }
-//
-//                }
-//            }
-//            while (change != true){
-//            while (strLoop != false) {
-//                System.out.println("Select stat for STR (1-6)");
-//                int str = GetInt();
-//                if (str < 7 && str > 0) {
-//                    stats.setStr(str);
-//                    strLoop = false;
-//
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            while (dexLoop != false) {
-//                System.out.println("Select stat for DEX (1-6)");
-//                int dex = GetInt();
-//                if (dex < 7 && dex > 0) {
-//                    stats.setDex(dex);
-//                    dexLoop = false;
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            while (conLoop != false) {
-//                System.out.println("Select stat for CON (1-6)");
-//                int con = GetInt();
-//                if (con < 7 && con > 0) {
-//                    stats.setCon(con);
-//                    conLoop = false;
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            while (wisLoop != false) {
-//                System.out.println("Select stat for WIS (1-6)");
-//                int wis = GetInt();
-//                if (wis < 7 && wis > 0) {
-//                    stats.setWis(wis);
-//                    wisLoop = false;
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            while (intLoop != false) {
-//                System.out.println("Select stat for INT (1-6)");
-//                int anInt = GetInt();
-//                if (anInt < 7 && anInt > 0) {
-//                    stats.setInt(anInt);
-//                    intLoop = false;
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            while (chaLoop != false) {
-//                System.out.println("Select stat for CHA (1-6)");
-//                int cha = GetInt();
-//                if (cha < 7 && cha > 0) {
-//                    stats.setCha(cha);
-//                    chaLoop = false;
-//                } else {
-//                    System.out.println("Input valid num");
-//                }
-//            }
-//            stats.printStats();
-//            System.out.println("Would you like to change your stat application? Y or N");
-//            String last = GetString().toLowerCase(Locale.ROOT);
-//            if(last.equals("y")){
-//                change = false;
-//            }else if(last.equals("n")){
-//                change = true;
-//                statLoop = false;
-//            }else{
-//                System.out.println("Enter valid string");
-//            }
-//        }
      }
    }
+
    public void setName(){
         boolean nameLoop = true;
         while (nameLoop != false) {
@@ -210,32 +153,9 @@ public class DoWork {
             }
         }
    }
-   public int setACMod(){
-        int mod = 0;
-        int dex = stats.getDex();
-        if (dex <= 5){
-            mod = -3;
-        }else if(dex <= 7 && dex > 5){
-            mod = -2;
-        }else if(dex <= 9 && dex > 7){
-            mod = -1;
-        }else if(dex <=11 && dex >9){
-            mod = 0;
-        }else if(dex <= 13 && dex > 11){
-            mod = 1;
-        }else if(dex <=15 && dex > 13){
-            mod = 2;
-        }else if(dex <= 17 && dex > 15){
-            mod = 3;
-        }else if (dex <=19 && dex > 17){
-            mod = 4;
-        }else if(dex >= 20){
-            mod = 5;
-        }else{
-            mod = 0;
-        }
-        return mod;
-   }
+
+
+
    public void getStats(){
 
        for (int i = 0; i < Stats.length; i++) {
@@ -243,6 +163,7 @@ public class DoWork {
 
        }
    }
+
    public void setSTR(){
         boolean strLoop = true;
        while (strLoop != false) {
@@ -293,6 +214,7 @@ public class DoWork {
 
        }
    }
+
     public void setCON(){
         boolean conLoop = true;
         while (conLoop != false) {
