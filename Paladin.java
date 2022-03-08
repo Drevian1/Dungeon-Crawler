@@ -8,9 +8,20 @@ public class Paladin extends PClass{
     }
 
     @Override
+    String setName() {
+        name = "Paladin";
+        return name;
+    }
+
+    @Override
     int getSpellPoints() {
         spellPoints = 20;
         return spellPoints;
+    }
+
+    @Override
+    String goString() {
+        return null;
     }
 
     public void reduceSpellPoints(int change){
@@ -22,7 +33,7 @@ public class Paladin extends PClass{
     }
 
     @Override
-    int attack(int AC, int mod) {
+    public int attack(int AC, int mod) {
         int damage = 0;
 
         int hitChance = (dice.RollOnce(20) + mod);

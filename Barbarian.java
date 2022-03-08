@@ -2,6 +2,10 @@ package edu.Neumont.oop.Model;
 
 public class Barbarian extends PClass{
 
+    public Barbarian() {
+        setArmor(4);
+        setName();
+    }
 
     @Override
     int setArmor(int mod) {
@@ -10,15 +14,21 @@ public class Barbarian extends PClass{
     }
 
     @Override
+    String setName() {
+        name = "Barbarian";
+        return name;
+    }
+
+    @Override
     int getSpellPoints() {
         return 0;
     }
 
     @Override
-    int attack(int AC, int mod) {
+    public int attack(int AC, int mod) {
         int damage = 0;
 
-            int hitChance = (dice.RollOnce(20) + mod);
+            int hitChance = (dice.RollOnce(20) + (mod + 5));
             if (hitChance >= AC) {
                 damage = (dice.RollOnce(12) + (mod + 10));
 
@@ -35,6 +45,14 @@ public class Barbarian extends PClass{
 
     @Override
     public String toString() {
+        return "Barbarian{" +
+                "name='" + name + '\'' +
+                ", armor=" + armor +
+                '}';
+    }
+
+    @Override
+    String goString() {
         return "Barbarian{" +
                 "armor=" + armor +
                 '}';

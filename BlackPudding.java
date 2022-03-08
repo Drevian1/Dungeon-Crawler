@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class BlackPudding extends Monster{
+    public BlackPudding() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 4;
@@ -30,7 +36,7 @@ public class BlackPudding extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 5);
         if (hitChance >= armorClass){

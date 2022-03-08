@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Cultist extends Monster{
+    public Cultist() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = (1/8);
@@ -8,7 +14,6 @@ public class Cultist extends Monster{
 
     @Override
     void setHealth() {
-
         health = (dice.rollMultiple(2,8));
     }
 
@@ -19,7 +24,7 @@ public class Cultist extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 3);
         if (hitChance >= armorClass){

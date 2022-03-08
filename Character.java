@@ -13,6 +13,7 @@ public class Character {
     }
 
     public void setpClass(PClass pClass) {
+
         this.pClass = pClass;
     }
 
@@ -273,10 +274,7 @@ public class Character {
         Cha = cha;
     }
 
-    public void printStats(){
-        System.out.println("STR: " + getStr() + '\n' + "DEX: " + getDex() + '\n' + "CON: " + getCon()
-                + '\n' + "WIS: " + getWis() + '\n' + "INT: " + getInt() + '\n' + "CHA: " + getCha());
-    }
+
 
 
 
@@ -330,5 +328,23 @@ public class Character {
         }else{
             level = 1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "race=" + race +
+                ", pClass=" + pClass +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", experience=" + experience +
+                ", Health=" + Health +
+                ", Str=" + Str +
+                ", Dex=" + Dex +
+                ", Con=" + Con +
+                ", Wis=" + Wis +
+                ", Int=" + Int +
+                ", Cha=" + Cha +
+                '}';
     }
 }

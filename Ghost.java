@@ -17,7 +17,7 @@ public class Ghost extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 5);
         if (hitChance >= armorClass){

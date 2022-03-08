@@ -7,38 +7,182 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class DoWork {
 
     private BufferedReader bread = new BufferedReader(new InputStreamReader(System.in));
     int[] PlayerStats = new int[6];
     int[] Stats = new int[6];
-    Character stats = new Character();
+    Character player = new Character();
     Race race;
     String define = "";
     PClass pClass;
-    Encounter encounter = new Encounter();
-    Monster monster;
 
+
+//Runs through  game
+    public void dungeon(){
+        MonsterFactory generator = new MonsterFactory();
+        System.out.println("Select game mode: " + '\n' + " A: Complete the disk");
+        String gameMode = GetString().toLowerCase(Locale.ROOT);
+
+        if (gameMode.equals("a")) {
+            int diskPieces = 0;
+            boolean adventure = true;
+            while (adventure != false) {
+                Random rnd = new Random();
+
+                int generate;
+                if (diskPieces <8){
+                    generate = 0;
+                }else{
+                    generate = 1;
+                }
+                Monster monster;
+                switch (generate) {
+                    case 0:
+                       monster = generator.gen_Monster();
+                        System.out.println("HP: " + player.getHealth());
+                        int monsterHP = monster.getHealth();
+                        System.out.println("Monster HP: " + monsterHP);
+
+                        boolean fightLoop = true;
+
+                        while (fightLoop != false) {
+                            System.out.println("Select action:" + '\n' + "A: Attack" + '\n' + "B: Ready" + '\n' + "C: Retreat");
+                            String action = GetString().toLowerCase(Locale.ROOT);
+                            if (action.equals("a")) {
+
+                                monsterHP = monsterHP - (player.getpClass().attack(monster.getArmorClass(), player.setStrMod()));
+
+                                if (monsterHP <= 0) {
+                                    System.out.println("You WIN");
+                                    int getEasyDisk = rnd.nextInt(100);
+                                    if (getEasyDisk <= 80) {
+                                        System.out.println("You found a disk piece");
+                                        diskPieces++;
+                                    }
+                                    fightLoop = false;
+                                    break;
+                                }
+
+                                System.out.println("Monster HP: " + monsterHP);
+
+                                player.setHealth(player.getHealth() - monster.attack(player.getpClass().getArmor()));
+                                if (player.getHealth() <= 0) {
+                                    System.out.println("You lose");
+                                    fightLoop = false;
+                                    break;
+                                }
+
+                                System.out.println("HP: " + player.getHealth());
+
+                            } else if (action.equals("b")) {
+
+                                System.out.println("You watch the monster and learn its movements");
+
+                                player.setHealth(player.getHealth() + 5);
+
+                                monster.attack(player.getpClass().getArmor() + 5);
+
+                                System.out.println("HP: " + player.getHealth());
+
+                            } else if (action.equals("c")) {
+                                monster.attack(player.getpClass().getArmor() + 5);
+
+                                System.out.println("HP: " + player.getHealth());
+                                fightLoop = false;
+                            }
+                        }
+
+                        break;
+
+                    case 1:
+                        monster = generator.generate_Boss();
+                        System.out.println("HP: " + player.getHealth());
+                        monsterHP = monster.getHealth();
+                        System.out.println("Monster HP: " + monsterHP);
+
+                        fightLoop = true;
+
+                        while (fightLoop != false) {
+                            System.out.println("Select action:" + '\n' + "A: Attack" + '\n' + "B: Ready" + '\n' + "C: Retreat");
+                            String action = GetString().toLowerCase(Locale.ROOT);
+                            if (action.equals("a")) {
+
+                                monsterHP = monsterHP - (player.getpClass().attack(monster.getArmorClass(), player.setStrMod()));
+
+                                if (monsterHP <= 0) {
+                                    System.out.println("You WIN");
+                                    player.setHealth(player.getHealth() + (player.getHealth()/2));
+                                    int getEasyDisk = rnd.nextInt(100);
+                                    if (getEasyDisk <= 80) {
+                                        System.out.println("You found a disk piece");
+                                        diskPieces++;
+                                    }
+                                    fightLoop = false;
+                                    break;
+                                }
+
+                                System.out.println("Monster HP: " + monsterHP);
+
+                                player.setHealth(player.getHealth() - monster.attack(player.getpClass().getArmor()));
+                                if (player.getHealth() <= 0) {
+                                    System.out.println("You lose");
+                                    fightLoop = false;
+                                    break;
+                                }
+
+                                System.out.println("HP: " + player.getHealth());
+
+                            } else if (action.equals("b")) {
+
+                                System.out.println("You watch the monster and learn its movements");
+
+                                player.setHealth(player.getHealth() + 5);
+
+                                monster.attack(player.getpClass().getArmor() + 5);
+
+                                System.out.println("HP: " + player.getHealth());
+
+                            } else if (action.equals("c")) {
+                                monster.attack(player.getpClass().getArmor() + 5);
+
+                                System.out.println("HP: " + player.getHealth());
+                                fightLoop = false;
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        System.out.println("Error");
+                        break;
+                }
+                if (diskPieces == 8) {
+                    System.out.println("You have completed the disk, you WIN");
+                    adventure = false;
+                } else if (player.getHealth() <= 0) {
+                    System.out.println("You lost");
+                    adventure = false;
+                }
+
+            }
+        }
+
+    }
+// calls both menus
     public void menu(){
         CharacterMenu();
-
+        dungeon();
     }
 
     public void printCharacter(){
-        System.out.println("Race: " + define + '\n' + "Name: " + stats.getName() + "Class: " + stats.getpClass());
+        System.out.println(player.toString());
 
-
-
-        stats.printStats();
-    }
-    public void combat(){
-        boolean combatLoop = true;
-        while (combatLoop != false){
-            System.out.println("What would you like to do? " + '\n' + "A: Attack" + '\n' + "B: Cast Spell"+ '\n' + "Disengage");
-        }
     }
 
+// creates custom character or
     public void CharacterMenu(){
 
         boolean createLoop = true;
@@ -50,67 +194,99 @@ public class DoWork {
                 System.out.println("Would you like to make a new character? Y or N");
                 String makeNew = GetString().toLowerCase(Locale.ROOT);
                 if (makeNew.equals("y")) {
-                    setRace();
+                    System.out.println("Select what race you would like your character to be:" + '\n' + "1: Human" + '\n' + "2: Elf" + '\n' + "3: Dwarf");
+                    setRace(GetInt());
                     StatMenu();
+                    System.out.println("Enter name for character");
+                    setName(GetString());
+                    setHealth();System.out.println("Select what class you would like your character to be:" + '\n' + "1: Fighter" + '\n' + "2: Barbarian" + '\n' + "3: Rogue");
 
-                    setName();
-                    setClass();
+                    setClass(GetInt());
                     printCharacter();
                     createLoop = false;
                 } else if (makeNew.equals("n")) {
+                    Random random = new Random();
+                    int rnd = random.nextInt(1,3);
+                    setRace(rnd);
+                    rndStats();
+                    setName("Jeffery");
+                    setHealth();
+                    setClass(rnd);
+                    printCharacter();
                     createLoop = false;
                 }
             }
         }
 
 
+        private void rndStats(){
+        getStats();
+        player.setStr(Stats[0]);
+            player.setStrMod();
+        player.setDex(Stats[1]);
+            player.setDexMod();
+        player.setCon(Stats[2]);
+            player.setConMod();
+        player.setInt(Stats[3]);
+            player.setIntMod();
+        player.setWis(Stats[4]);
+            player.setWisMod();
+        player.setCha(Stats[5]);
+            player.setChaMod();
+        }
 
-    public void setRace(){
+
+
+    public void setRace(int choice){
         boolean raceLoop = true;
         while (raceLoop != false){
-            System.out.println("Select what race you would like your character to be:" + '\n' + "A: Human" + '\n' + "B: Elf" + '\n' + "C: Dwarf");
-            String choice = GetString().toLowerCase(Locale.ROOT);
-            if (choice.equals("a")){
+
+
+            if (choice == 1){
                 race = new Human();
                 define = "Human";
                 raceLoop = false;
-            }else if(choice.equals("b")){
+            }else if(choice == 2){
                 race = new Elf();
                 define = "Elf";
                 raceLoop = false;
-            }else if(choice.equals("c")){
+            }else if(choice == 3){
                 race = new Dwarf();
                 define = "Dwarf";
                 raceLoop = false;
             }else{
                 System.out.println("Please enter valid option");
             }
+
         }
+        player.setRace(race);
     }
-    public void setClass(){
+    public void setHealth(){
+        Dice dice = new Dice();
+
+        player.setHealth(dice.rollMultiple(10,12) + (player.setConMod() * 2));
+    }
+    public void setClass(int decision){
         boolean classLoop = true;
         while (classLoop != false){
-            System.out.println("Select what class you would like your character to be:" + '\n' + "A: Fighter" + '\n' + "B: Barbarian" + '\n' + "C: Rogue" + '\n' + "D: Wizard" + '\n' + "E: Paladin");
-            String decison = GetString().toLowerCase(Locale.ROOT);
-            if (decison.equals("a")){
+
+
+            if (decision == 1){
                 pClass = new Fighter();
                 classLoop = false;
-            }else if(decison.equals("b")){
+            }else if(decision==2){
                 pClass = new Barbarian();
                 classLoop = false;
-            }else if(decison.equals("c")){
+            }else if(decision==3){
                 pClass = new Rogue();
                 classLoop = false;
-            }else if(decison.equals("d")){
-                pClass = new Wizard();
-                classLoop = false;
-            }else if(decison.equals("e")) {
-                pClass = new Paladin();
-                classLoop = false;
+
             }else{
                 System.out.println("Please enter valid option");
             }
+
         }
+        player.setpClass(pClass);
     }
     public void StatMenu(){
 
@@ -122,35 +298,34 @@ public class DoWork {
             getStats();
             printStats();
             setSTR();
-            stats.setStrMod();
+            player.setStrMod();
             setDEX();
-            stats.setDexMod();
+            player.setDexMod();
             setCON();
-            stats.setConMod();
+            player.setConMod();
             setWIS();
-            stats.setWisMod();
+            player.setWisMod();
             setINT();
-            stats.setIntMod();
+            player.setIntMod();
             setCHA();
-            stats.setChaMod();
-            stats.printStats();
+            player.setChaMod();
+
             statLoop = false;
 
      }
    }
 
-   public void setName(){
-        boolean nameLoop = true;
-        while (nameLoop != false) {
-            System.out.println("Enter name for character");
-            String name = GetString();
+   public void setName(String name){
+
+
+
             if (name.isEmpty() || name.isBlank()){
-                stats.setName("Hero with no Name");
-                nameLoop = false;
+                player.setName("Hero with no Name");
+
             }else {
-                stats.setName(name);
-                nameLoop = false;
-            }
+                player.setName(name);
+
+
         }
    }
 
@@ -159,7 +334,7 @@ public class DoWork {
    public void getStats(){
 
        for (int i = 0; i < Stats.length; i++) {
-           Stats[i] = stats.generateStat();
+           Stats[i] = player.generateStat();
 
        }
    }
@@ -175,11 +350,11 @@ public class DoWork {
                System.out.println("Please select valid stat");
            }else{
                if (define.equals("Human")){
-                   stats.setStr(Stats[num -1] + 1);
+                   player.setStr(Stats[num -1] + 1);
                }else{
-                   stats.setStr(Stats[num - 1]);
+                   player.setStr(Stats[num - 1]);
                }
-               PlayerStats[0] = stats.getStr();
+               PlayerStats[0] = player.getStr();
                Stats[num - 1] = 0;
 
                printStats();
@@ -200,13 +375,13 @@ public class DoWork {
                System.out.println("Please select valid stat");
            }else{
                if (define.equals("Human")){
-                   stats.setDex(Stats[num - 1] + 1);
+                   player.setDex(Stats[num - 1] + 1);
                }else if(define.equals("Elf")){
-                   stats.setDex(Stats[num - 1] + 2);
+                   player.setDex(Stats[num - 1] + 2);
                }else{
-                   stats.setDex(Stats[num - 1]);
+                   player.setDex(Stats[num - 1]);
                }
-               PlayerStats[1] = stats.getDex();
+               PlayerStats[1] = player.getDex();
                Stats[num - 1] = 0;
                printStats();
                dexLoop = false;
@@ -226,13 +401,13 @@ public class DoWork {
                 System.out.println("Please select valid stat");
             }else{
                 if (define.equals("Human")){
-                    stats.setCon(Stats[num - 1] + 1);
+                    player.setCon(Stats[num - 1] + 1);
                 }else if(define.equals("Dwarf")){
-                    stats.setCon(Stats[num - 1] + 2);
+                    player.setCon(Stats[num - 1] + 2);
                 }else {
-                    stats.setCon(Stats[num - 1]);
+                    player.setCon(Stats[num - 1]);
                 }
-                PlayerStats[2] = stats.getCon();
+                PlayerStats[2] = player.getCon();
                 Stats[num - 1] = 0;
                 printStats();
                 conLoop = false;
@@ -251,13 +426,13 @@ public class DoWork {
                 System.out.println("Please select valid stat");
             }else{
                 if(define.equals("Human")){
-                    stats.setWis(Stats[num - 1] + 1);
+                    player.setWis(Stats[num - 1] + 1);
                 }else if(define.equals("Dwarf")){
-                    stats.setWis(Stats[num - 1] + 1);
+                    player.setWis(Stats[num - 1] + 1);
                 }else {
-                    stats.setWis(Stats[num - 1]);
+                    player.setWis(Stats[num - 1]);
                 }
-                PlayerStats[3] = stats.getWis();
+                PlayerStats[3] = player.getWis();
                 Stats[num - 1] = 0;
                 printStats();
                 wisLoop = false;
@@ -276,13 +451,13 @@ public class DoWork {
                 System.out.println("Please select valid stat");
             }else{
                 if (define.equals("Human")){
-                    stats.setInt(Stats[num - 1] + 1);
+                    player.setInt(Stats[num - 1] + 1);
                 }else if(define.equals("Elf")){
-                    stats.setInt(Stats[num - 1] + 1);
+                    player.setInt(Stats[num - 1] + 1);
                 }else {
-                    stats.setInt(Stats[num - 1]);
+                    player.setInt(Stats[num - 1]);
                 }
-                PlayerStats[4] = stats.getInt();
+                PlayerStats[4] = player.getInt();
                 Stats[num - 1] = 0;
                 printStats();
                 intLoop = false;
@@ -301,11 +476,11 @@ public class DoWork {
                 System.out.println("Please select valid stat");
             }else{
                 if (define.equals("Human")){
-                    stats.setCha(Stats[num - 1] + 1);
+                    player.setCha(Stats[num - 1] + 1);
                 }else {
-                    stats.setCha(Stats[num - 1]);
+                    player.setCha(Stats[num - 1]);
                 }
-                PlayerStats[5] = stats.getCha();
+                PlayerStats[5] = player.getCha();
                 Stats[num - 1] = 0;
                 printStats();
                 chaLoop = false;

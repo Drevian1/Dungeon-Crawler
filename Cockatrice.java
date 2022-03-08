@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Cockatrice extends Monster{
+    public Cockatrice() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = (1/2);
@@ -17,7 +23,7 @@ public class Cockatrice extends Monster{
     }
 //must make save
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 3);
         if (hitChance >= armorClass){

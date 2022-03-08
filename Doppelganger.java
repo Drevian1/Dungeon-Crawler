@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Doppelganger extends Monster{
+    public Doppelganger() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     Character character = new Character();
     @Override
     void setChallengeRating() {
@@ -18,7 +24,7 @@ public class Doppelganger extends Monster{
     }
 
     @Override
-        int attack(int AC) {
+    public int attack(int AC) {
             int damage = 0;
             int attacks = 0;
             while (attacks < 2) {

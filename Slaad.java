@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Slaad extends Monster{
+    public Slaad() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 5;
@@ -21,7 +27,7 @@ public class Slaad extends Monster{
     }
 //attacks three times
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 6);
         if (hitChance >= armorClass){
@@ -30,6 +36,7 @@ public class Slaad extends Monster{
             damage = 0;
             System.out.println("Attack missed");
         }
+        regenerate();
         return damage;
     }
 }

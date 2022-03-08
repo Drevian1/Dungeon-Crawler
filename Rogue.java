@@ -1,10 +1,21 @@
 package edu.Neumont.oop.Model;
 
 public class Rogue extends PClass{
+    public Rogue() {
+        setArmor(5);
+        setName();
+    }
+
     @Override
     int setArmor(int mod) {
         armor = 11 + mod;
         return armor;
+    }
+
+    @Override
+    String setName() {
+        name = "Rogue";
+        return name;
     }
 
     @Override
@@ -14,13 +25,13 @@ public class Rogue extends PClass{
 
 
     @Override
-    int attack(int AC, int mod) {
+    public int attack(int AC, int mod) {
         int damage = 0;
 
-        int hitChance = (dice.RollOnce(20) + mod);
+        int hitChance = (dice.RollOnce(20) + (5 + mod));
 
         if (hitChance >= AC) {
-            damage = (dice.RollOnce(4) + (mod) + (dice.rollMultiple(4,6)));
+            damage = (dice.RollOnce(4) + (mod + 5) + (dice.rollMultiple(4,6)));
 
         } else {
             damage = 0;
@@ -33,8 +44,11 @@ public class Rogue extends PClass{
 
     }
 
+
+
+
     @Override
-    public String toString() {
+     String goString() {
         return "Rogue{" +
                 "armor=" + armor +
                 '}';

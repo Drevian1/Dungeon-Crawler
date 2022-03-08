@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Zombie extends Monster{
+    public Zombie() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = (1/4);
@@ -21,7 +27,7 @@ public class Zombie extends Monster{
         }
     }
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 3);
         if (hitChance >= armorClass){

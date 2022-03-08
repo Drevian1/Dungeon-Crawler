@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Tarrasque extends Monster{
+    public Tarrasque() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 30;
@@ -17,7 +23,7 @@ public class Tarrasque extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 19);
         if (hitChance >= armorClass){

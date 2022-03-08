@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Balor extends Monster{
+    public Balor() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 19;
@@ -27,7 +33,7 @@ public class Balor extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 14);
         if (hitChance >= armorClass){

@@ -1,6 +1,11 @@
 package edu.Neumont.oop.Model;
 
 public class Skeleton extends Monster{
+    public Skeleton() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
 
     @Override
     void setChallengeRating() {
@@ -18,7 +23,7 @@ public class Skeleton extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 4);
         if (hitChance >= armorClass){

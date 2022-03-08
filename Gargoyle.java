@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Gargoyle extends Monster{
+    public Gargoyle() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 2;
@@ -17,7 +23,7 @@ public class Gargoyle extends Monster{
     }
 //attacks twice
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 4);
         if (hitChance >= armorClass){

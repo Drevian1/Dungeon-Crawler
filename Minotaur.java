@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Minotaur extends Monster{
+    public Minotaur() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 3;
@@ -21,7 +27,7 @@ public class Minotaur extends Monster{
         return gore();
     }
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 6);
         if (hitChance >= armorClass){

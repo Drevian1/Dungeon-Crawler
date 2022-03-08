@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class PurpleWorm extends Monster{
+    public PurpleWorm() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 15;
@@ -17,7 +23,7 @@ public class PurpleWorm extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 14);
         if (hitChance >= armorClass){

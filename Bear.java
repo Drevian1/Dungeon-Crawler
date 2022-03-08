@@ -1,6 +1,13 @@
 package edu.Neumont.oop.Model;
 
 public class Bear  extends Monster{
+
+    public Bear() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 1;
@@ -17,7 +24,7 @@ public class Bear  extends Monster{
     }
 //attacks twice
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 6);
         if (hitChance >= armorClass){

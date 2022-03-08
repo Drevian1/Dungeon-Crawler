@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Ettin extends Monster{
+    public Ettin() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 4;
@@ -17,7 +23,7 @@ public class Ettin extends Monster{
     }
 //attacks twice
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 7);
         if (hitChance >= armorClass){

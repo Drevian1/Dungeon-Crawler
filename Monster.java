@@ -28,6 +28,6 @@ public abstract class Monster {
     }
 
     abstract void setArmorClass();
-    abstract int attack(int armorClass);
+    public abstract int attack(int armorClass);
 
 }

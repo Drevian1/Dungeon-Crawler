@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Owlbear extends Monster{
+    public Owlbear() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 3;
@@ -17,7 +23,7 @@ public class Owlbear extends Monster{
     }
 //attacks twice
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage = 0;
         int attacks = 0;
         while(attacks < 2) {

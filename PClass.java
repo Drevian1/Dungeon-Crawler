@@ -1,7 +1,7 @@
 package edu.Neumont.oop.Model;
 
 public abstract class PClass {
-
+    protected String name;
     Dice dice = new Dice();
     protected int armor;
 
@@ -11,17 +11,20 @@ public abstract class PClass {
 
     abstract int setArmor(int mod);
 
+    public String getName() {
+        return name;
+    }
 
     protected int spellPoints;
 
-
+    abstract String setName();
 
     abstract int getSpellPoints();
 
+    abstract String goString();
 
 
-
-    abstract int attack(int AC, int modifier);
+    public abstract int attack(int AC, int modifier);
 
 
 }

@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class Troll extends Monster{
+    public Troll() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 5;
@@ -23,7 +29,7 @@ public class Troll extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 7);
         if (hitChance >= armorClass){
@@ -32,6 +38,7 @@ public class Troll extends Monster{
             damage = 0;
             System.out.println("Attack missed");
         }
+        regenerate();
         return damage;
     }
 }

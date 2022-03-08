@@ -1,6 +1,12 @@
 package edu.Neumont.oop.Model;
 
 public class HookHorror extends Monster{
+    public HookHorror() {
+        setArmorClass();
+        setHealth();
+        setChallengeRating();
+    }
+
     @Override
     void setChallengeRating() {
         challengeRating = 3;
@@ -17,7 +23,7 @@ public class HookHorror extends Monster{
     }
 
     @Override
-    int attack(int armorClass) {
+    public int attack(int armorClass) {
         int damage;
         int hitChance = (dice.RollOnce(20) + 6);
         if (hitChance >= armorClass){

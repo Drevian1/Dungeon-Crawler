@@ -9,6 +9,12 @@ public class Wizard extends PClass{
     }
 
     @Override
+    String setName() {
+        name = "Wizard";
+        return name;
+    }
+
+    @Override
     int getSpellPoints() {
         spellPoints = 30;
         return spellPoints;
@@ -56,7 +62,7 @@ public class Wizard extends PClass{
 
 
     @Override
-    int attack(int AC, int mod) {
+    public int attack(int AC, int mod) {
         int damage = 0;
 
         int hitChance = (dice.RollOnce(20) + mod);
@@ -75,8 +81,8 @@ public class Wizard extends PClass{
 
     }
 
-    @Override
-    public String toString() {
+     @Override
+    String goString() {
         return "Wizard{" +
                 "armor=" + armor +
                 ", spellPoints=" + spellPoints +
