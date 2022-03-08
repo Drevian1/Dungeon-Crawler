@@ -1,0 +1,10 @@
+public class SPotion {
+
+    int smallPotion = 15;
+
+    public void SmallPotion(){
+        smallPotion = Integer.parseInt("Small Potion");
+        Health = Health + smallPotion;
+        System.out.println("You drink the small potion. Your fatigued is relieved.");
+    }
+}
