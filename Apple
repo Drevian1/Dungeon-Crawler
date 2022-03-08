@@ -1,0 +1,19 @@
+public class Apple {
+
+    int apple = 50;
+
+    public void Apple(){
+        apple = Integer.parseInt("Apple");
+        Random ran = new Random();
+        ran.nextInt(3);
+        if(ran == 1){
+            Health = Health + apple;
+            System.out.println("You take a bite of the delicious apple!");
+        }
+        if(ran == 2){
+            Health = Health - apple;
+            System.out.println("You've bitten into a poisoned apple!");
+        }
+
+    }
+}
