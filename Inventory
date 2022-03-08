@@ -1,0 +1,16 @@
+public class Inventory {
+   List<String> inv = new ArrayList<String>();
+
+   public void Items(){
+      String choice;
+      System.out.println("Would you like to pick up loot?");
+      choice = scan.nextLine();
+
+      if(choice.equals("take")) {
+         System.out.println("You took the item!");
+         inv.add(Item);
+      }
+
+      System.out.println(inv);
+   }
+}
