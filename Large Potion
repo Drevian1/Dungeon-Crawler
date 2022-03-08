@@ -1,0 +1,9 @@
+public class LPotion {
+    int largePotion = 50;
+
+    public void LargePotion(){
+        largePotion = Integer.parseInt("Large Potion");
+        Health = Health + largePotion;
+        System.out.println("You gulp down the large potion, you feel reinvigorated!");
+    }
+}
