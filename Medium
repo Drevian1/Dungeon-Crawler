@@ -1,0 +1,9 @@
+public class MPotion {
+    int mediumPotion = 25;
+
+    public void MediumPotion(){
+        mediumPotion = Integer.parseInt("Medium Potion");
+        Health = Health + mediumPotion;
+        System.out.println("You drink the medium potion. Your wounds are healed.");
+    }
+}
